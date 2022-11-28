@@ -1,0 +1,36 @@
+paths:
+  processed: ${hydra:runtime.cwd}/../../data/processed/datos_procesados.csv
+  clean: ${hydra:runtime.cwd}/../../data/clean/datos_limpios.csv
+  raw: ${hydra:runtime.cwd}/../../data/raw/345w-el-salvador-1.csv
+  testing: ${hydra:runtime.cwd}/../../data/test/testeo.csv
+  testing_exit: ${hydra:runtime.cwd}/../../data/test/salida_testeo.csv
+cleaning:
+  area: "SECTOR / CLUSTER"
+  description: "DESCRIPCIÓN DE LA ACTIVIDAD"
+preprocessing:
+  date : False
+  date_format : None
+  accents : True
+  lowercasing : True
+  privacy: True
+  privacy_format: "multi:replace" 
+  correction: True 
+  media: True 
+  media_format: "mention:delete"
+  numbers : False
+  punctuation : True
+  stopwords : True
+  tokenizer : True
+  debug : False
+show:
+  matrix: False
+  graphs: False
+  study: False
+models:
+  model: logistica
+pipeline:
+  cleaning: False
+  preprocessing: False
+  balance: False
+  training: False
+  testing: False
