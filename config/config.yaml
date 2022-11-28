@@ -30,7 +30,7 @@ models:
   model: logistica
 pipeline:
   cleaning: False
-  preprocessing: False
+  preprocessing: True
   balance: False
   training: False
   testing: False

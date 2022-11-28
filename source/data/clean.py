@@ -10,8 +10,6 @@ from config.config import GlobalConfig
 cs = ConfigStore.instance() 
 cs.store(name='nlp_config', node=GlobalConfig)
 
-@hydra.main(version_base=None, config_path='../../config', config_name='config')
-
 def clean(cfg: GlobalConfig):
     raw_data = pd.read_csv(cfg.paths.raw)
     df = pd.DataFrame(raw_data)
