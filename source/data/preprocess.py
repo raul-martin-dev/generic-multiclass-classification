@@ -21,7 +21,7 @@ def preprocess(cfg: GlobalConfig):
                                 ,tokenizer = cfg.preprocessing.tokenizer)
     # preprocessor = Preprocessing()
 
-    test = preprocessor.filePipeline(cfg.paths.clean, cfg.cleaning.description)
+    test = preprocessor.filePipeline(cfg.paths.clean, cfg.dataset.description)
     preprocessor.write(test,cfg.paths.clean,cfg.paths.processed)
 
                             

@@ -4,7 +4,7 @@ paths:
   raw: ${hydra:runtime.cwd}/../../data/raw/345w-el-salvador-1.csv
   testing: ${hydra:runtime.cwd}/../../data/test/testeo.csv
   testing_exit: ${hydra:runtime.cwd}/../../data/test/salida_testeo.csv
-cleaning:
+dataset:
   area: "SECTOR / CLUSTER"
   description: "DESCRIPCIÓN DE LA ACTIVIDAD"
 preprocessing:
@@ -27,10 +27,10 @@ show:
   graphs: False
   study: False
 models:
-  model: logistica
+  model: visualization
 pipeline:
   cleaning: False
-  preprocessing: True
+  preprocessing: False
   balance: False
   training: False
   testing: False

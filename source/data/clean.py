@@ -14,11 +14,11 @@ def clean(cfg: GlobalConfig):
     raw_data = pd.read_csv(cfg.paths.raw)
     df = pd.DataFrame(raw_data)
     # Get only desired fields
-    clean_data = df.loc[:, [cfg.cleaning.area,cfg.cleaning.description]]
+    clean_data = df.loc[:, [cfg.dataset.area,cfg.dataset.description]]
     # Clean NaN
     clean_data = clean_data.dropna()
     # Clean No comments
-    clean_data = clean_data[clean_data[cfg.cleaning.description]!= "No comments"]
+    clean_data = clean_data[clean_data[cfg.dataset.description]!= "No comments"]
     # Clean duplicate values
     clean_data = clean_data.drop_duplicates()
     

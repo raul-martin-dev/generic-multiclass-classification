@@ -4,6 +4,7 @@ sys.path.append("../..")
 
 from data.clean import clean
 from data.preprocess import preprocess
+from models.visualization import visualization
 import spacy
 spanish = spacy.load('es_core_news_sm')
 
@@ -20,6 +21,8 @@ def main(cfg: GlobalConfig):
         clean(cfg)
     if cfg.pipeline.preprocessing :
         preprocess(cfg)
+    if cfg.models.model == 'visualization' :
+        visualization(cfg)
 
 if __name__ == '__main__':
     sys.argv.append('hydra/job_logging=disabled')
