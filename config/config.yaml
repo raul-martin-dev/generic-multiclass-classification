@@ -2,8 +2,8 @@ paths:
   processed: ${hydra:runtime.cwd}/../../data/processed/datos_procesados.csv
   clean: ${hydra:runtime.cwd}/../../data/clean/datos_limpios.csv
   raw: ${hydra:runtime.cwd}/../../data/raw/345w-el-salvador-1.csv
-  testing: ${hydra:runtime.cwd}/../../data/test/testeo.csv
-  testing_exit: ${hydra:runtime.cwd}/../../data/test/salida_testeo.csv
+  # testing: ${hydra:runtime.cwd}/../../data/test/testeo.csv
+  # testing_exit: ${hydra:runtime.cwd}/../../data/test/salida_testeo.csv
 dataset:
   area: "SECTOR / CLUSTER"
   description: "DESCRIPCIÓN DE LA ACTIVIDAD"
@@ -22,15 +22,15 @@ preprocessing:
   stopwords : True
   tokenizer : True
   debug : False
-show:
-  matrix: False
-  graphs: False
-  study: False
+# show:
+#   matrix: False
+#   graphs: False
+#   study: False
 models:
   model: visualization
 pipeline:
   cleaning: False
   preprocessing: False
-  balance: False
-  training: False
-  testing: False
+  # balance: False
+  # training: False
+  # testing: False
