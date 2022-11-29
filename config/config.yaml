@@ -8,6 +8,8 @@ dataset:
   area: "SECTOR / CLUSTER"
   description: "DESCRIPCIÓN DE LA ACTIVIDAD"
   preprocessed: "preprocessed_text"
+cleaning:
+  specific-sets: True
 preprocessing:
   date : False
   date_format : None
@@ -29,13 +31,16 @@ preprocessing:
 #   study: False
 vectorizing:
   # tf-idf / count
-  mode: "tf-idf" 
+  mode: "tf-idf"
+balancing:
+  # TomekLinks / 
+  mode: "TomekLinks-extra"
 models:
   # visualization / balancing_test
   model: balancing_test
 pipeline:
   cleaning: False
   preprocessing: False
-  # balance: False
+  # balancing: False
   # training: False
   # testing: False

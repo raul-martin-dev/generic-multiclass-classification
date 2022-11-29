@@ -11,6 +11,7 @@ cs = ConfigStore.instance()
 cs.store(name='nlp_config', node=GlobalConfig)
 
 from features.vectorizer import vectorize
+from features.balancer import balance
 
 def balancing(cfg: GlobalConfig):
     print ('====== Balancing started =======')
@@ -21,6 +22,8 @@ def balancing(cfg: GlobalConfig):
     x = df[cfg.dataset.preprocessed]
 
     x = vectorize(cfg,x)
+
+    x,y = balance(cfg,x,y)
     
     print ('================================')
     print ('======= Balancing ended ========')

@@ -21,6 +21,9 @@ def clean(cfg: GlobalConfig):
     clean_data = clean_data[clean_data[cfg.dataset.description]!= "No comments"]
     # Clean duplicate values
     clean_data = clean_data.drop_duplicates()
+
+    # dataset specific
+    # pendiente de cambiar (hacer una función specific)
     
 
     clean_data.to_csv(cfg.paths.clean)
