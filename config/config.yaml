@@ -7,6 +7,7 @@ paths:
 dataset:
   area: "SECTOR / CLUSTER"
   description: "DESCRIPCIÓN DE LA ACTIVIDAD"
+  preprocessed: "preprocessed_text"
 preprocessing:
   date : False
   date_format : None
@@ -26,8 +27,12 @@ preprocessing:
 #   matrix: False
 #   graphs: False
 #   study: False
+vectorizing:
+  # tf-idf / count
+  mode: "tf-idf" 
 models:
-  model: visualization
+  # visualization / balancing_test
+  model: balancing_test
 pipeline:
   cleaning: False
   preprocessing: False
