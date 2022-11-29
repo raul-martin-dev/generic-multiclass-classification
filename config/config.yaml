@@ -34,7 +34,8 @@ vectorizing:
   mode: "tf-idf"
 balancing:
   # TomekLinks / 
-  mode: "TomekLinks-extra"
+  mode: "TomekLinks"
+  extra: True
 models:
   # visualization / balancing_test
   model: balancing_test

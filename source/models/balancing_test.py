@@ -12,6 +12,7 @@ cs.store(name='nlp_config', node=GlobalConfig)
 
 from features.vectorizer import vectorize
 from features.balancer import balance
+from features.visualizer import bar_viusualize
 
 def balancing(cfg: GlobalConfig):
     print ('====== Balancing started =======')
@@ -24,6 +25,8 @@ def balancing(cfg: GlobalConfig):
     x = vectorize(cfg,x)
 
     x,y = balance(cfg,x,y)
+
+    bar_viusualize(y,cfg.dataset.area,cfg.dataset.description)
     
     print ('================================')
     print ('======= Balancing ended ========')
