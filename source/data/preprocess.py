@@ -22,7 +22,7 @@ def preprocess(cfg: GlobalConfig):
     # preprocessor = Preprocessing()
 
     test = preprocessor.filePipeline(cfg.paths.clean, cfg.dataset.description)
-    preprocessor.write(test,cfg.paths.clean,cfg.paths.processed)
+    preprocessor.write(test,cfg.paths.clean,cfg.paths.processed) # pendiente de cambiar con preln (añadir el nombre de la columna texto preprocesado)
 
                             
 if __name__ == '__main__':
