@@ -32,6 +32,8 @@ preprocessing:
 vectorizing:
   # tf-idf / count
   mode: "tf-idf"
+splitting:
+  test_size: 0.2 # 0-1.0
 balancing:
   # TomekLinks / 
   mode: "TomekLinks"

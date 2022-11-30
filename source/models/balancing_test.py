@@ -11,6 +11,7 @@ cs = ConfigStore.instance()
 cs.store(name='nlp_config', node=GlobalConfig)
 
 from features.vectorizer import vectorize
+from features.spliter import split
 from features.balancer import balance
 from features.visualizer import bar_viusualize
 
@@ -22,11 +23,18 @@ def balancing(cfg: GlobalConfig):
     y = df[cfg.dataset.area]
     x = df[cfg.dataset.preprocessed]
 
+    # initial visualization
+    ammount = df[cfg.dataset.area]
+    bar_viusualize(ammount,cfg.dataset.area,cfg.dataset.description)
+
     x = vectorize(cfg,x)
 
-    x,y = balance(cfg,x,y)
+    X_train, X_test, Y_train, Y_test = split(cfg,x,y)
 
-    bar_viusualize(y,cfg.dataset.area,cfg.dataset.description)
+    X_train,Y_train = balance(cfg,X_train,Y_train)
+
+    # balanced data visualization
+    bar_viusualize(Y_train,cfg.dataset.area,cfg.dataset.description)
     
     print ('================================')
     print ('======= Balancing ended ========')
