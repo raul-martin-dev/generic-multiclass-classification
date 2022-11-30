@@ -40,10 +40,12 @@ models:
 pipeline:
   cleaning: False
   preprocessing: False
-  balancing: False
+  vectorizing: True
+  splitting: True
+  balancing: True
   # training: False
   # testing: False
 visualization:
   graph:
-    initial: True
-    post-balance: True
+    initial: False
+    post_balance: False

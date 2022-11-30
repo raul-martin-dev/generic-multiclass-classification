@@ -10,6 +10,9 @@ from data.preprocess import preprocess
 
 #features
 from features.visualizer import bar_viusualize
+from features.vectorizer import vectorize
+from features.splitter import split
+from features.balancer import balance
 
 # models
 from models.visualization import visualization
@@ -29,6 +32,7 @@ cs.store(name='nlp_config', node=GlobalConfig)
 def main(cfg: GlobalConfig):
     if cfg.pipeline.cleaning :
         clean(cfg)
+
     if cfg.pipeline.preprocessing :
         preprocess(cfg)
 
@@ -37,14 +41,31 @@ def main(cfg: GlobalConfig):
     x = df[cfg.dataset.preprocessed]
 
     if cfg.visualization.graph.initial:
-        print ('\n==== initial visualization started =====')
-        print ('========================================\n')
+        print ('\n==== initial visualization started ====')
+        print ('=======================================\n')
 
         ammount = df[cfg.dataset.area]
         bar_viusualize(ammount,cfg.dataset.area,cfg.dataset.description)
         
-        print ('\n========================================')
-        print ('===== initial visualization ended ======\n')
+        print ('\n=======================================')
+        print ('===== initial visualization ended =====\n')
+    
+    if cfg.pipeline.vectorizing :
+        x = vectorize(cfg,x)
+
+    if cfg.pipeline.splitting :
+        X_train, X_test, Y_train, Y_test = split(cfg,x,y)
+
+    if cfg.pipeline.balancing :
+        X_train,Y_train = balance(cfg,X_train,Y_train)
+        if cfg.visualization.graph.post_balance:
+            print ('\n===== post-balance visualization started =====')
+            print ('==============================================\n')
+
+            bar_viusualize(Y_train,cfg.dataset.area,cfg.dataset.description)
+            
+            print ('\n============================================')
+            print ('===== post-balance visualization ended =====\n')
 
     # models
     if cfg.models.model == 'visualization' :
