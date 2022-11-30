@@ -25,10 +25,6 @@ preprocessing:
   stopwords : True
   tokenizer : True
   debug : False
-# show:
-#   matrix: False
-#   graphs: False
-#   study: False
 vectorizing:
   # tf-idf / count
   mode: "tf-idf"
@@ -40,10 +36,14 @@ balancing:
   extra: True
 models:
   # visualization / balancing_test
-  model: balancing_test
+  model: None
 pipeline:
   cleaning: False
   preprocessing: False
-  # balancing: False
+  balancing: False
   # training: False
   # testing: False
+visualization:
+  graph:
+    initial: True
+    post-balance: True

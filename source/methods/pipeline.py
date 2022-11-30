@@ -2,8 +2,14 @@ import sys
 sys.path.append("..")
 sys.path.append("../..")
 
+import pandas as pd
+
+# data
 from data.clean import clean
 from data.preprocess import preprocess
+
+#features
+from features.visualizer import bar_viusualize
 
 # models
 from models.visualization import visualization
@@ -25,6 +31,20 @@ def main(cfg: GlobalConfig):
         clean(cfg)
     if cfg.pipeline.preprocessing :
         preprocess(cfg)
+
+    df = pd.read_csv(cfg.paths.processed)
+    y = df[cfg.dataset.area]
+    x = df[cfg.dataset.preprocessed]
+
+    if cfg.visualization.graph.initial:
+        print ('\n==== initial visualization started =====')
+        print ('========================================\n')
+
+        ammount = df[cfg.dataset.area]
+        bar_viusualize(ammount,cfg.dataset.area,cfg.dataset.description)
+        
+        print ('\n========================================')
+        print ('===== initial visualization ended ======\n')
 
     # models
     if cfg.models.model == 'visualization' :
