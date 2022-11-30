@@ -13,6 +13,7 @@ from features.visualizer import bar_viusualize
 from features.vectorizer import vectorize
 from features.splitter import split
 from features.balancer import balance
+from features.trainer import train
 
 # models
 from models.visualization import visualization
@@ -67,11 +68,8 @@ def main(cfg: GlobalConfig):
             print ('\n============================================')
             print ('===== post-balance visualization ended =====\n')
 
-    # models
-    if cfg.models.model == 'visualization' :
-        visualization(cfg)
-    if cfg.models.model == 'balancing_test' :
-        balancing(cfg)
+    if cfg.pipeline.training :
+        model = train(cfg,X_train,Y_train,model=cfg.models.model)
 
 if __name__ == '__main__':
     sys.argv.append('hydra/job_logging=disabled')

@@ -60,7 +60,7 @@ def balance(cfg: GlobalConfig,x,y):
         try:
             resample = RandomOverSampler()
             x, y = resample.fit_resample(x, y)
-            if cfg.balancing.extra:
+            if cfg.balancing.extra and cfg.debugging.warnings:
                     print("\n" + '\033[93m' + "> WARNING:" + '\033[0m')
                     print('\033[93m' + "The 'extra' feature is toggled on the config file. This feature is not necessary when using 'Random' mode\n" + '\033[0m')
         except Exception as e:

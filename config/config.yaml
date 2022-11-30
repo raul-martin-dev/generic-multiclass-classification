@@ -1,13 +1,16 @@
 paths:
-  processed: ${hydra:runtime.cwd}/../../data/processed/datos_procesados.csv
-  clean: ${hydra:runtime.cwd}/../../data/clean/datos_limpios.csv
+  config_file: ${hydra:runtime.cwd}/../../config/config.yaml
   raw: ${hydra:runtime.cwd}/../../data/raw/345w-el-salvador-1.csv
+  clean: ${hydra:runtime.cwd}/../../data/clean/datos_limpios.csv
+  processed: ${hydra:runtime.cwd}/../../data/processed/datos_procesados.csv
   # testing: ${hydra:runtime.cwd}/../../data/test/testeo.csv
   # testing_exit: ${hydra:runtime.cwd}/../../data/test/salida_testeo.csv
+  store_models: ${hydra:runtime.cwd}/../../models/
 dataset:
-  area: "SECTOR / CLUSTER"
-  description: "DESCRIPCIÓN DE LA ACTIVIDAD"
-  preprocessed: "preprocessed_text"
+  alias: 'el-salvador'
+  area: 'SECTOR / CLUSTER'
+  description: 'DESCRIPCIÓN DE LA ACTIVIDAD'
+  preprocessed: 'preprocessed_text'
 cleaning:
   specific-sets: True
 preprocessing:
@@ -16,10 +19,10 @@ preprocessing:
   accents : True
   lowercasing : True
   privacy: True
-  privacy_format: "multi:replace" 
+  privacy_format: 'multi:replace' 
   correction: True 
   media: True 
-  media_format: "mention:delete"
+  media_format: 'mention:delete'
   numbers : False
   punctuation : True
   stopwords : True
@@ -27,25 +30,40 @@ preprocessing:
   debug : False
 vectorizing:
   # tf-idf / count
-  mode: "tf-idf"
+  mode: 'tf-idf'
 splitting:
   test_size: 0.2 # 0-1.0
 balancing:
   # TomekLinks / 
-  mode: "TomekLinks"
+  mode: 'TomekLinks'
   extra: True
 models:
-  # visualization / balancing_test
-  model: None
+  store: True
+  model: 'logistic'
+  logistic:
+    C: 1000
+    penalty: 'l2'
+    max_iter: 10000
+    multi_class: 'ovr'
+  mlp:
+    hidden_layer_sizes: 5
+    max_iter: 35
+    activation: 'relu'
+    solver: 'sgd'
+    random_state: '25'
+    learning_rate: 'constant'
+    learning_rate_init: '0.5'
 pipeline:
   cleaning: False
   preprocessing: False
   vectorizing: True
   splitting: True
   balancing: True
-  # training: False
+  training: True
   # testing: False
 visualization:
   graph:
     initial: False
     post_balance: False
+debuggin:
+  warnings: True
