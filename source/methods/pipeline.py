@@ -14,6 +14,7 @@ from features.vectorizer import vectorize
 from features.splitter import split
 from features.balancer import balance
 from features.trainer import train
+from features.tester import test
 
 # models
 from models.visualization import visualization
@@ -70,6 +71,9 @@ def main(cfg: GlobalConfig):
 
     if cfg.pipeline.training :
         model = train(cfg,X_train,Y_train,model=cfg.models.model)
+
+    if cfg.pipeline.testing :
+        predictions = test(model,X_test)
 
 if __name__ == '__main__':
     sys.argv.append('hydra/job_logging=disabled')
