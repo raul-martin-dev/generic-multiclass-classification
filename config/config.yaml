@@ -60,10 +60,11 @@ pipeline:
   splitting: True
   balancing: True
   training: True
-  testing: False
+  testing: True
 visualization:
   graph:
-    initial: False
-    post_balance: False
+    initial: True
+    post_balance: True
+  matrix: True
 debuggin:
   warnings: True

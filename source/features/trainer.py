@@ -18,12 +18,16 @@ import shutil
 
 def train(cfg: GlobalConfig,X_train,Y_train,model):
     if model == "logistic":
+        print("\n> Training a Logistic Regression model")
         trained_model = LogisticRegression(C=cfg.models.logistic.C, 
                                             penalty=cfg.models.logistic.penalty, 
                                             max_iter=cfg.models.logistic.max_iter, 
                                             multi_class=cfg.models.logistic.multi_class
                                             ).fit(X_train, Y_train)
+        print('\033[92m'+"Training ended successfully\n"+'\033[0m')
+
     elif model == 'mlp':
+        print("\n> Training a Multilayer Perceptron Classification model")
         trained_model = MLPClassifier(hidden_layer_sizes=cfg.models.mlp.hidden_layer_sizes, 
                                         max_iter=cfg.models.mlp.max_iter, 
                                         activation=cfg.models.mlp.activation, 
@@ -31,7 +35,10 @@ def train(cfg: GlobalConfig,X_train,Y_train,model):
                                         random_state=cfg.models.mlp.random_state, 
                                         learning_rate=cfg.models.mlp.learning_rate, 
                                         learning_rate_init=cfg.models.mlp.learning_rate_init).fit(X_train, Y_train)
+        print('\033[92m'+"Training ended successfully\n"+'\033[0m')
+
     if cfg.models.store:
+        print("\n> Storing the model")
         if cfg.debuggin.warnings:
             print("\n" + '\033[93m' + "> WARNING:" + '\033[0m')
             print('\033[93m' + "Storing model is enabled. This could take some disk space. If the model doesn't have to be stored, you can disable the 'store' feature in the config file\n" + '\033[0m')
@@ -52,6 +59,8 @@ def train(cfg: GlobalConfig,X_train,Y_train,model):
             pickle.dump(model, f)
 
         shutil.copy(config_file, path + "config_used.txt")
+
+        print('\033[92m'+"Model stored successfully\n"+'\033[0m')
 
     return trained_model
 

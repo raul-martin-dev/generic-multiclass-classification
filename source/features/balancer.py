@@ -12,9 +12,11 @@ from imblearn.over_sampling import RandomOverSampler
 
 def balance(cfg: GlobalConfig,x,y):
     if cfg.balancing.extra:
+        print('\033[96m'+"\n> Extra mode detected:" +'\033[0m' + "Balancing the dataset (extra initial random oversampling) ...")
         dictionary = small_class_locator(y)
         resample = RandomOverSampler(sampling_strategy=dictionary)
         x, y = resample.fit_resample(x, y)
+        print('\033[92m'+"Extra balancing ended successfully"+'\033[0m')
 
     if cfg.balancing.mode == "SMOTE":
         print("\n> Balancing the dataset (SMOTE strategy) ...")
@@ -29,6 +31,8 @@ def balance(cfg: GlobalConfig,x,y):
             else:
                 print("\n" + '\033[91m' + "> CRITICAL ERROR:" + '\033[0m')
                 print('\033[91m' + "Something went wrong during the balancing. Unknown Error: " + type(e).__name__ + '\033[0m')
+        else:
+            print('\033[92m'+"Balancing ended successfully\n"+'\033[0m')
 
     if cfg.balancing.mode == "TomekLinks":
         print("\n> Balancing the dataset (SMOTETomek, TomekLinks strategy) ...")
@@ -42,6 +46,8 @@ def balance(cfg: GlobalConfig,x,y):
             else:
                 print("\n" + '\033[91m' + "> CRITICAL ERROR:" + '\033[0m')
                 print('\033[91m' + "Something went wrong during the balancing. Unknown Error: " + type(e).__name__ + '\033[0m')
+        else:
+            print('\033[92m'+"Balancing ended successfully\n"+'\033[0m')
 
     if cfg.balancing.mode == "SMOTEENN":
         print("\n> Balancing the dataset (SMOTEEN strategy)")
@@ -55,6 +61,9 @@ def balance(cfg: GlobalConfig,x,y):
             else:
                 print("\n" + '\033[91m' + "> CRITICAL ERROR:" + '\033[0m')
                 print('\033[91m' + "Something went wrong during the balancing. Unknown Error: " + type(e).__name__ + '\033[0m')
+        else:
+            print('\033[92m'+"Balancing ended successfully\n"+'\033[0m')
+
     if cfg.balancing.mode == "Random":
         print("\n> Balancing the dataset (Random Oversampling strategy)")
         try:
@@ -66,6 +75,8 @@ def balance(cfg: GlobalConfig,x,y):
         except Exception as e:
             print("\n" + '\033[91m' + "> CRITICAL ERROR:" + '\033[0m')
             print('\033[91m' + "Something went wrong during the balancing. Unknown Error: " + type(e).__name__ + '\033[0m')
+        else:
+            print('\033[92m'+"Balancing ended successfully\n"+'\033[0m')
 
     return x,y
 

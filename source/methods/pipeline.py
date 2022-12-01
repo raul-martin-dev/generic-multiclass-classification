@@ -10,6 +10,7 @@ from data.preprocess import preprocess
 
 #features
 from features.visualizer import bar_viusualize
+from features.visualizer import confusion_matrix_viusualize
 from features.vectorizer import vectorize
 from features.splitter import split
 from features.balancer import balance
@@ -74,6 +75,14 @@ def main(cfg: GlobalConfig):
 
     if cfg.pipeline.testing :
         predictions = test(model,X_test)
+        if cfg.visualization.matrix:
+            print ('\n===== confusion matrix visualization started =====')
+            print ('==================================================\n')
+
+            confusion_matrix_viusualize(Y_test, predictions)
+            
+            print ('\n================================================')
+            print ('===== confusion matrix visualization ended =====\n')
 
 if __name__ == '__main__':
     sys.argv.append('hydra/job_logging=disabled')
