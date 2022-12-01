@@ -1,4 +1,5 @@
 # ignore stored trained models
 models/*
 # ignore __pycache__
-__pycache__/*
+__pycache__/
+*.py[cod]
