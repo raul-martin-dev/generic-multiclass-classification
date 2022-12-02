@@ -53,6 +53,12 @@ models:
     random_state: '25'
     learning_rate: 'constant'
     learning_rate_init: '0.5'
+testing:
+  metrics:
+    precision: True
+    recall: True
+    f1: True
+    accuracy: True
 pipeline:
   cleaning: False
   preprocessing: False
@@ -66,5 +72,6 @@ visualization:
     initial: True
     post_balance: True
   matrix: True
+  metrics: True
 debuggin:
   warnings: True
