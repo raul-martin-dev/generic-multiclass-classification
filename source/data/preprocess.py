@@ -11,6 +11,8 @@ cs = ConfigStore.instance()
 cs.store(name='nlp_config', node=GlobalConfig)
 
 def preprocess(cfg: GlobalConfig):
+    print("\n> Preprocessing the dataset")
+
     preprocessor = Preprocessing( date_format = cfg.preprocessing.date_format
                                 ,accents = cfg.preprocessing.accents
                                 ,lowercasing = cfg.preprocessing.lowercasing
@@ -23,7 +25,8 @@ def preprocess(cfg: GlobalConfig):
 
     test = preprocessor.filePipeline(cfg.paths.clean, cfg.dataset.description)
     preprocessor.write(test,cfg.paths.clean,cfg.paths.processed) # pendiente de cambiar con preln (añadir el nombre de la columna texto preprocesado)
-
+    
+    print('\033[92m'+"Preprocessing ended successfully\n"+'\033[0m')
                             
 if __name__ == '__main__':
     sys.argv.append('hydra/job_logging=disabled')

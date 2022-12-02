@@ -60,8 +60,8 @@ testing:
     f1: True
     accuracy: True
 pipeline:
-  cleaning: False
-  preprocessing: False
+  cleaning: True
+  preprocessing: True
   vectorizing: True
   splitting: True
   balancing: True

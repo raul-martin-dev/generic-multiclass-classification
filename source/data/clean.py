@@ -11,6 +11,8 @@ cs = ConfigStore.instance()
 cs.store(name='nlp_config', node=GlobalConfig)
 
 def clean(cfg: GlobalConfig):
+    print("\n> Cleaning the dataset")
+
     raw_data = pd.read_csv(cfg.paths.raw)
     df = pd.DataFrame(raw_data)
     # Get only desired fields
@@ -27,6 +29,8 @@ def clean(cfg: GlobalConfig):
     
 
     clean_data.to_csv(cfg.paths.clean)
+    
+    print('\033[92m'+"Cleaning ended successfully\n"+'\033[0m')
 
 if __name__ == '__main__':
     clean()
