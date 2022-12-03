@@ -1,15 +1,16 @@
 paths:
   config_file: ${hydra:runtime.cwd}/../../config/config.yaml
-  raw: ${hydra:runtime.cwd}/../../data/raw/345w-el-salvador-1.csv
+  raw: ${hydra:runtime.cwd}/../../data/raw/trafico_calle_30_2016.csv
+  raw_folder: ${hydra:runtime.cwd}/../../data/raw/trafico_calle_30/
   clean: ${hydra:runtime.cwd}/../../data/clean/datos_limpios.csv
   processed: ${hydra:runtime.cwd}/../../data/processed/datos_procesados.csv
   # testing: ${hydra:runtime.cwd}/../../data/test/testeo.csv
   # testing_exit: ${hydra:runtime.cwd}/../../data/test/salida_testeo.csv
   store_models: ${hydra:runtime.cwd}/../../models/
 dataset:
-  alias: 'el-salvador'
-  area: 'SECTOR / CLUSTER'
-  description: 'DESCRIPCIÓN DE LA ACTIVIDAD'
+  alias: 'trafico-30'
+  area: 'Tipo de accidente'
+  description: 'Descripción del accidente'
   preprocessed: 'preprocessed_text'
 cleaning:
   specific-sets: True
@@ -50,9 +51,9 @@ models:
     max_iter: 35
     activation: 'relu'
     solver: 'sgd'
-    random_state: '25'
+    random_state: 25
     learning_rate: 'constant'
-    learning_rate_init: '0.5'
+    learning_rate_init: 0.5
 testing:
   metrics:
     precision: True
@@ -60,6 +61,8 @@ testing:
     f1: True
     accuracy: True
 pipeline:
+  data_joining: False
+  data_skip: True
   cleaning: True
   preprocessing: True
   vectorizing: True
@@ -69,8 +72,8 @@ pipeline:
   testing: True
 visualization:
   graph:
-    initial: True
-    post_balance: True
+    initial: False
+    post_balance: False
   matrix: True
   metrics: True
 debuggin:

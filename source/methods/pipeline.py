@@ -34,13 +34,24 @@ cs.store(name='nlp_config', node=GlobalConfig)
 @hydra.main(version_base=None, config_path='../../config', config_name='config')
 
 def main(cfg: GlobalConfig):
-    if cfg.pipeline.cleaning :
-        clean(cfg)
+    
+    if cfg.pipeline.data_skip==False :
+        if cfg.pipeline.cleaning :
+            clean(cfg)
 
-    if cfg.pipeline.preprocessing :
-        preprocess(cfg)
+        if cfg.pipeline.preprocessing :
+            preprocess(cfg)
 
-    df = pd.read_csv(cfg.paths.processed)
+        if cfg.pipeline.preprocessing :
+            df = pd.read_csv(cfg.paths.processed)
+        else :
+            if cfg.pipeline.cleaning :
+                df = pd.read_csv(cfg.paths.clean)
+            else:
+                df = pd.read_csv(cfg.paths.raw)
+    else:
+        df = pd.read_csv(cfg.paths.processed)
+
     y = df[cfg.dataset.area]
     x = df[cfg.dataset.preprocessed]
 

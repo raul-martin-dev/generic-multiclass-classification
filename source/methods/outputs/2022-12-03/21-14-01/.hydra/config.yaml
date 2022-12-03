@@ -1,0 +1,76 @@
+paths:
+  config_file: ${hydra:runtime.cwd}/../../config/config.yaml
+  raw: ${hydra:runtime.cwd}/../../data/raw/trafico_calle_30_2016.csv
+  raw_folder: ${hydra:runtime.cwd}/../../data/raw/trafico_calle_30/
+  clean: ${hydra:runtime.cwd}/../../data/clean/datos_limpios.csv
+  processed: ${hydra:runtime.cwd}/../../data/processed/datos_procesados.csv
+  store_models: ${hydra:runtime.cwd}/../../models/
+dataset:
+  alias: trafico-30
+  area: Tipo de accidente
+  description: Descripción del accidente
+  preprocessed: preprocessed_text
+cleaning:
+  specific-sets: true
+preprocessing:
+  date: false
+  date_format: None
+  accents: true
+  lowercasing: true
+  privacy: true
+  privacy_format: multi:replace
+  correction: true
+  media: true
+  media_format: mention:delete
+  numbers: false
+  punctuation: true
+  stopwords: true
+  tokenizer: true
+  debug: false
+vectorizing:
+  mode: tf-idf
+splitting:
+  test_size: 0.2
+balancing:
+  mode: TomekLinks
+  extra: true
+models:
+  store: false
+  model: logistic
+  logistic:
+    C: 1000
+    penalty: l2
+    max_iter: 10000
+    multi_class: ovr
+  mlp:
+    hidden_layer_sizes: 5
+    max_iter: 35
+    activation: relu
+    solver: sgd
+    random_state: '25'
+    learning_rate: constant
+    learning_rate_init: '0.5'
+testing:
+  metrics:
+    precision: true
+    recall: true
+    f1: true
+    accuracy: true
+pipeline:
+  data_joining: false
+  data_skip: true
+  cleaning: true
+  preprocessing: true
+  vectorizing: true
+  splitting: true
+  balancing: false
+  training: true
+  testing: true
+visualization:
+  graph:
+    initial: true
+    post_balance: true
+  matrix: true
+  metrics: true
+debuggin:
+  warnings: true
